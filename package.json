@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/telnyx-mcp-server.git"
+    "url": "git+https://github.com/your-username/telnyx-mcp-server.git"
   },
   "keywords": [
     "mcp",
@@ -29,10 +29,18 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "dependencies": {},
-  "devDependencies": {},
   "mcp": {
     "runtime": "container",
     "transport": "http"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/telnyx-mcp-server/issues"
+  },
+  "homepage": "https://github.com/your-username/telnyx-mcp-server#readme",
+  "dependencies": {
+    "tsx": "^4.20.5"
   }
 }
