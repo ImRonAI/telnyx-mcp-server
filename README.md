@@ -1,6 +1,6 @@
 # Telnyx MCP Server
 
-A Model Context Protocol (MCP) server for the Telnyx API, providing comprehensive access to Telnyx's telephony, messaging, and communication services.
+Full Implementation of the Telnyx API as a Model Context Protocol (MCP) server, providing comprehensive access to Telnyx's telephony, messaging, and communication services.
 
 ## Features
 
@@ -45,7 +45,7 @@ The server provides MCP tools for:
 ## Deployment
 
 ### Smithery Platform
-Coming soon - Smithery deployment configuration for hosted MCP server.
+Deploy using the included `smithery.yaml` configuration for hosted MCP server.
 
 ### Docker
 ```bash

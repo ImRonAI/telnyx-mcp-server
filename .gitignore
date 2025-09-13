@@ -2,6 +2,8 @@
 .env
 .env.local
 .env.production
+.env.*
+!.env.example
 
 # API Keys and secrets
 *.key
@@ -11,9 +13,14 @@ secrets/
 # Logs
 *.log
 logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
 # Dependency directories
 node_modules/
+jspm_packages/
 __pycache__/
 *.pyc
 .Python
@@ -61,3 +68,23 @@ pids
 htmlcov/
 .coverage
 .pytest_cache/
+coverage/
+*.lcov
+.nyc_output
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional caches
+.npm
+.eslintcache
+.stylelintcache
+.cache
+.parcel-cache
+
+# Build outputs
+.next
+out
+.nuxt
+.svelte-kit/
+.serverless/
