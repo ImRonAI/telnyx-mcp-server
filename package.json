@@ -2,7 +2,8 @@
   "name": "telnyx-mcp-server",
   "version": "1.0.0",
   "description": "Production-ready MCP server for Telnyx telecommunications APIs",
-  "main": "src/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "scripts": {
     "start": "./deployment/start.sh",
     "test": "python3 tests/integration-test.py",
