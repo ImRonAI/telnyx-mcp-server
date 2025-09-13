@@ -1,0 +1,119 @@
+runtime: "container"
+version: "1.0.0"
+metadata:
+  name: "Telnyx MCP Server"
+  description: "Production-ready MCP server for Telnyx telecommunications APIs"
+  tags: ["telecommunications", "sms", "voice", "messaging", "api"]
+  
+build:
+  dockerfile: "deployment/Dockerfile"
+  dockerBuildPath: "."
+  buildArgs:
+    - "NODE_ENV=production"
+    - "LOG_LEVEL=INFO"
+  
+startCommand:
+  type: "http"
+  port: 8080
+  protocol: "http"
+  healthCheck:
+    enabled: true
+    path: "/health"
+    interval: 30
+    timeout: 10
+    retries: 3
+  
+  # Environment configuration schema
+  configSchema:
+    type: "object"
+    title: "Telnyx MCP Server Configuration"
+    description: "Configuration schema for Telnyx MCP Server deployment"
+    properties:
+      telnyxApiKey:
+        type: "string"
+        title: "Telnyx API Key"
+        description: "Your Telnyx API key for authentication (starts with 'KEY')"
+        pattern: "^KEY[a-zA-Z0-9_-]+$"
+        minLength: 10
+        examples: ["KEY12345678-1234-5678-9abc-def012345678"]
+      logLevel:
+        type: "string"
+        title: "Log Level"
+        description: "Logging level for the server"
+        enum: ["DEBUG", "INFO", "WARN", "ERROR"]
+        default: "INFO"
+      apiBaseUrl:
+        type: "string"
+        title: "API Base URL"
+        description: "Base URL for Telnyx API (usually default is fine)"
+        format: "uri"
+        default: "https://api.telnyx.com/v2"
+        pattern: "^https://.*"
+      enableOperationPrompts:
+        type: "boolean"
+        title: "Enable Operation Prompts"
+        description: "Enable detailed prompts for API operations"
+        default: true
+      maxRequestSize:
+        type: "integer"
+        title: "Max Request Size (MB)"
+        description: "Maximum request size in megabytes"
+        minimum: 1
+        maximum: 100
+        default: 10
+      timeout:
+        type: "integer"
+        title: "Request Timeout (seconds)"
+        description: "Timeout for API requests in seconds"
+        minimum: 5
+        maximum: 300
+        default: 30
+    required: ["telnyxApiKey"]
+    additionalProperties: false
+    
+  # Environment variable mapping
+  environmentMapping:
+    TELNYX_API_KEY: "telnyxApiKey"
+    LOG_LEVEL: "logLevel"
+    API_BASE_URL: "apiBaseUrl"
+    ENABLE_OPERATION_PROMPTS: "enableOperationPrompts"
+    MAX_REQUEST_SIZE: "maxRequestSize"
+    REQUEST_TIMEOUT: "timeout"
+    
+deployment:
+  resources:
+    memory: "512Mi"
+    cpu: "500m"
+    storage: "1Gi"
+  scaling:
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPU: 70
+  
+  # Security settings
+  security:
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    seccompProfile:
+      type: "RuntimeDefault"
+      
+monitoring:
+  enabled: true
+  metrics:
+    enabled: true
+    path: "/metrics"
+    port: 8080
+  logging:
+    level: "INFO"
+    format: "json"
+    
+networking:
+  ingress:
+    enabled: true
+    tls: true
+    annotations:
+      "smithery.ai/rate-limit": "1000/hour"
+      "smithery.ai/timeout": "30s"

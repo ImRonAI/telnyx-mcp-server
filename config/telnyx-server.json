@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "telnyx-api": {
+      "command": "uvx",
+      "args": ["awslabs.openapi-mcp-server@latest"],
+      "env": {
+        "API_NAME": "telnyx",
+        "API_BASE_URL": "https://api.telnyx.com/v2",
+        "API_SPEC_PATH": "/Users/timhunter/ronreal/telnyx.yml",
+        "LOG_LEVEL": "INFO",
+        "ENABLE_OPERATION_PROMPTS": "true",
+        "TELNYX_API_KEY": "${TELNYX_API_KEY}"
+      }
+    }
+  }
+}
