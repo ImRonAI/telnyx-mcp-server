@@ -1,0 +1,61 @@
+# Prometheus configuration for Telnyx MCP Server monitoring
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: 'production'
+    service: 'telnyx-mcp-server'
+
+rule_files:
+  - "alert-rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Telnyx MCP Server metrics
+  - job_name: 'telnyx-mcp-server'
+    static_configs:
+      - targets: ['localhost:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    scheme: http
+    
+    # Custom labels
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:8080
+
+  # Health check endpoint
+  - job_name: 'telnyx-mcp-health'
+    static_configs:
+      - targets: ['localhost:8080']
+    metrics_path: '/health'
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    scheme: http
+    
+    # Health check specific configuration
+    metric_relabelings:
+      - source_labels: [__name__]
+        regex: 'up'
+        target_label: health_status
+        replacement: 'healthy'
+
+  # System metrics (if node_exporter is available)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['localhost:9100']
+    scrape_interval: 30s
+    
+    # Only scrape if node_exporter is available
+    honor_labels: true
+    honor_timestamps: true

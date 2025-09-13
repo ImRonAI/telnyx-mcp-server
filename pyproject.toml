@@ -1,0 +1,39 @@
+[project]
+name = "telnyx-mcp-server"
+version = "1.0.0"
+description = "Telnyx MCP Server - Model Context Protocol server for Telnyx API"
+authors = [
+    {name = "Ron AI", email = "support@ron-ai.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.12"
+
+dependencies = [
+    "httpx>=0.25.0",
+    "pydantic>=2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/ron-ai/telnyx-mcp-server"
+Repository = "https://github.com/ron-ai/telnyx-mcp-server"
+Documentation = "https://smithery.ai/server/telnyx-mcp"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "aiohttp>=3.8.0",
+    "pyyaml>=6.0.0",
+    "docker>=6.0.0",
+    "cryptography>=41.0.0"
+]

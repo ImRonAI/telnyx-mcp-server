@@ -1,0 +1,37 @@
+{
+  "name": "telnyx-mcp-server",
+  "version": "1.0.0",
+  "description": "Production-ready MCP server for Telnyx telecommunications APIs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "./deployment/start.sh",
+    "test": "python3 tests/integration-test.py",
+    "validate": "python3 tests/deployment-validator.py",
+    "build": "echo 'Using Docker build process'",
+    "dev": "export TELNYX_API_KEY=test && ./scripts/start_telnyx_mcp.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/telnyx-mcp-server.git"
+  },
+  "keywords": [
+    "mcp",
+    "telnyx",
+    "telecommunications",
+    "sms",
+    "voice",
+    "api",
+    "openapi"
+  ],
+  "author": "Ron AI",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "mcp": {
+    "runtime": "container",
+    "transport": "http"
+  }
+}

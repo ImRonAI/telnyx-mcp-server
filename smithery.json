@@ -1,0 +1,118 @@
+{
+  "serverId": "telnyx-mcp-server",
+  "name": "Telnyx MCP Server",
+  "version": "1.0.0",
+  "description": "A comprehensive MCP server providing access to Telnyx telecommunications APIs including SMS, voice, number management, and messaging services. Built from the official Telnyx OpenAPI specification with 566 endpoints and 822 routes.",
+  "author": {
+    "name": "Telnyx Integration Team",
+    "email": "support@telnyx.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/telnyx-mcp"
+  },
+  "tags": [
+    "telecommunications",
+    "sms",
+    "voice",
+    "messaging",
+    "phone-numbers",
+    "api",
+    "telnyx",
+    "communications"
+  ],
+  "categories": ["communication", "business", "api-integration"],
+  "deployment": {
+    "localOnly": false,
+    "hostedDeployment": true,
+    "type": "container"
+  },
+  "transport": {
+    "type": "http",
+    "protocol": "https",
+    "supportedMethods": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    "healthCheck": {
+      "path": "/health",
+      "method": "GET",
+      "expectedStatus": 200
+    }
+  },
+  "authentication": {
+    "required": true,
+    "type": "api-key",
+    "description": "Requires a valid Telnyx API key with appropriate permissions"
+  },
+  "capabilities": {
+    "tools": 822,
+    "resources": 0,
+    "prompts": 782
+  },
+  "requirements": {
+    "runtime": "container",
+    "memory": "512Mi",
+    "cpu": "500m",
+    "storage": "1Gi"
+  },
+  "environment": {
+    "required": [
+      "TELNYX_API_KEY"
+    ],
+    "optional": [
+      "LOG_LEVEL",
+      "PORT",
+      "API_BASE_URL",
+      "ENABLE_OPERATION_PROMPTS"
+    ]
+  },
+  "documentation": {
+    "quickstart": "Set your TELNYX_API_KEY environment variable and deploy. The server provides access to all Telnyx APIs including SMS, voice, number management, and more.",
+    "apiReference": "https://developers.telnyx.com/docs/api/",
+    "examples": [
+      {
+        "name": "Send SMS",
+        "description": "Send an SMS message using the Telnyx messaging API",
+        "tool": "messaging_send_message"
+      },
+      {
+        "name": "List Phone Numbers",
+        "description": "List available phone numbers in your Telnyx account",
+        "tool": "phone_numbers_list_phone_numbers"
+      },
+      {
+        "name": "Make Voice Call",
+        "description": "Initiate a voice call using Telnyx Call Control API",
+        "tool": "call_control_create_call"
+      }
+    ]
+  },
+  "security": {
+    "dataHandling": {
+      "pii": true,
+      "phoneNumbers": true,
+      "messagingContent": true,
+      "callData": true
+    },
+    "encryption": "in-transit",
+    "compliance": ["SOC2", "GDPR", "CCPA"],
+    "auditLogging": true
+  },
+  "license": "MIT",
+  "keywords": [
+    "mcp-server",
+    "telnyx",
+    "telecommunications",
+    "sms",
+    "voice",
+    "api-integration",
+    "messaging",
+    "phone-numbers"
+  ],
+  "homepage": "https://developers.telnyx.com",
+  "bugs": {
+    "url": "https://github.com/your-org/telnyx-mcp/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/telnyx"
+  }
+}
