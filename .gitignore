@@ -88,3 +88,4 @@ out
 .nuxt
 .svelte-kit/
 .serverless/
+.vercel

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "telnyx-mcp-server",
+  "builds": [
+    {
+      "src": ".smithery/index.cjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/.smithery/index.cjs"
+    }
+  ],
+  "env": {
+    "TELNYX_API_KEY": "@telnyx_api_key"
+  }
+}
